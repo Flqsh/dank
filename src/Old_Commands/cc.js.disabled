@@ -1,0 +1,16 @@
+const Discord = module.require("discord.js")
+
+module.exports.run  = async (bot, message, args) => {
+    return message.channel.send("This command is temperarily disabled. Sorry for the inconvenience.");
+
+    const chan = message.guild.channels.cache.find(channel => channel.id === "732009253463916574")
+    let sliced = args.join(" ");
+    //message.delete();
+    chan.send(`e${sliced}`);
+    
+            
+}
+
+module.exports.help = {
+    name: "cc"
+}

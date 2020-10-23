@@ -1,0 +1,76 @@
+const Discord = module.require("discord.js");
+const config = require('./config.json');
+
+module.exports.run  = async (bot, message, args) => {
+    return message.channel.send("This command is temperarily disabled. Sorry for the inconvenience.");
+
+    if(!message.member.roles.cache.some(role => role.id === '701353851105574975') && !message.member.roles.cache.some(role => role.id === '729870136198037537') && !message.member.roles.cache.some(role => role.id === '701353851172683838') && !message.member.hasPermission("MANAGE_ROLES") && !message.member.hasPermission("MANAGE_CHANNELS")){
+    return message.channel.send("You do not have permission to perform this command.");
+    }
+    let sliced = args.slice(1).join(" ");
+    const giveaway  = message.guild.roles.cache.get('701353851080671275');
+    const inside = message.guild.roles.cache.get('701353851080671273');
+    const outside = message.guild.roles.cache.get('736682044842836002');
+    const events = message.guild.roles.cache.get('701353851080671272');
+    var randomColor = Math.floor(Math.random()*16777215).toString(16);
+    var embed;
+    var ping; //14
+    var words = ['heist', 'heists', 'robbing', 'inside', 'in-server', 'inserver', 'out-of-server', 'outside', 'outserver', 'giveaway', 'giveaways', 'gaw', 'events', 'event']
+    var chans = ['701353851965669389', '701353851965669390', '701353851965669391', '735008381751787571', '701353852204482560', '712526279890436147', '701353852204482564', '702291130292764765', '701353852494020637']
+    if(!args[0] === words[1] || !args[0] === words[2] || !args[0] === words[3] || !args[0] === words[4] || !args[0] === words[5] || !args[0] === words[6] || !args[0] === words[7] || !args[0] === words[8] || !args[0] === words[9] || !args[0] === words[10] || !args[0] === words[11] || !args[0] === words[12] || !args[0] === words[13] || !args[0] === words[14]){
+        return message.channel.send('Invalid role. Please specify a role to ping.');
+    }
+    if(message.channel.id !== chans[1] && message.channel.id !== chans[2] && message.channel.id !== chans[3] && message.channel.id !== chans[4] && message.channel.id !== chans[5] && message.channel.id !== chans[6] && message.channel.id !== chans[7] && message.channel.id !== chans[8] && message.channel.id !== chans[9]){
+        return message.channel.send("You cannot use this here!")
+    }
+    if(!sliced) return message.channel.send("Please specify a message to send with your ping.")
+    if(args[0].toLowerCase() === 'heist' || args[0].toLowerCase() === 'heists' || args[0].toLowerCase() === 'robbing'){
+        var ping = `${inside} ${outside} ${giveaway}`
+        var embed = new Discord.MessageEmbed()
+        .setAuthor('🔒 All Heists / 🎉 Giveaway', message.guild.iconURL())
+        .setTitle(sliced)
+        .setColor(randomColor)
+        .setFooter(`Heist Hosted by ${message.author.username}.`, message.author.avatarURL());
+    }
+    if(args[0].toLowerCase() === 'inside' || args[0].toLowerCase() === 'in-server' || args[0].toLowerCase() === 'inserver'){
+        var ping = `${inside}`
+        var embed = new Discord.MessageEmbed()
+        .setAuthor('🔒 Inside Heist', message.guild.iconURL())
+        .setTitle(sliced)
+        .setColor(randomColor)
+        .setFooter(`Heist Hosted by ${message.author.username}.`, message.author.avatarURL());
+    }
+    if(args[0].toLowerCase() === 'outside' || args[0].toLowerCase() === 'out-of-server' || args[0].toLowerCase() === 'outserver'){
+        var ping = `${outside}`
+        var embed = new Discord.MessageEmbed()
+        .setAuthor('🔓 Outside Heist', message.guild.iconURL())
+        .setTitle(sliced)
+        .setColor(randomColor)
+        .setFooter(`Heist Hosted by ${message.author.username}.`, message.author.avatarURL());
+    }
+    if(args[0].toLowerCase() === 'giveaway' || args[0].toLowerCase() === 'gaw' || args[0].toLowerCase() === 'giveaways'){
+        var ping = `${giveaway}`
+        var embed = new Discord.MessageEmbed()
+        .setAuthor('🎉 Giveaway', message.guild.iconURL())
+        .setTitle(sliced)
+        .setColor(randomColor)
+        .setFooter(`Giveaway Hosted by ${message.author.username}.`, message.author.avatarURL());
+    }
+    if(args[0].toLowerCase() === 'event' || args[0].toLowerCase() === 'events'){
+        var ping = `${events}`
+        var embed = new Discord.MessageEmbed()
+        .setAuthor('🏅 Event', message.guild.iconURL())//.setAuthor(message.guild.name, message.guild.iconURL())
+        .setTitle(sliced)
+        .setColor(randomColor)
+        .setFooter(`Event Hosted by ${message.author.username}.`, message.author.avatarURL());
+    }
+    message.channel.send(ping, embed);
+    message.delete();
+    
+}
+
+module.exports.help = {
+    name: "announce"
+}
+// announce heist 
+//   -1      0

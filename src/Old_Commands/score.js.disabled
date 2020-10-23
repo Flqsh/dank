@@ -1,0 +1,41 @@
+const Discord = module.require("discord.js");
+const usedCommand = new Set();
+const fs = module.require("fs");
+
+
+module.exports.run  = async (bot, message, args) => {
+    return message.channel.send("This command is temperarily disabled. Sorry for the inconvenience.");
+    const mentionedMember = message.mentions.members.first();
+    var mem;
+    if(usedCommand.has(message.author.id)) return message.channel.send("You must wait 5 seconds before using this command again.");
+    if(message.channel.id !== "701353852494020632") return message.channel.send("You may only use this command in the <#701353852494020632> channel.");
+    if(!mentionedMember){
+        var mem = message.author;
+    }else{
+        var mem = mentionedMember;
+    }
+    if(!bot.reps[mem.id]){
+        bot.reps[mem.id] = {
+            score: 0
+        }
+    }
+
+    let score = bot.reps[mem.id].score;
+    if(!mentionedMember){
+        message.channel.send(`You currently have a rep score of **${score}**!`)
+    }else{
+        message.channel.send(`That user currently has a rep score of **${score}**!`)
+    }
+    
+
+    
+
+
+    setTimeout(() => {
+        usedCommand.delete(message.author.id);
+    }, 5000);
+  
+}
+module.exports.help = {
+    name: "score"
+}

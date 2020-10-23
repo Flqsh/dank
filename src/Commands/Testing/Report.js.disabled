@@ -1,0 +1,52 @@
+const Command = require('../../Structures/Command.js');
+const Report = require('../../models/Report');
+const mongoose = require('mongoose');
+mongoose.connect('mongodb+srv://user:flashdb@ds.g3k6w.azure.mongodb.net/Reports?retryWrites=true&w=majority', {
+    useNewUrlParser: true
+  });
+
+/*const mongoose = require('mongodb').MongoClient;
+const uri = "mongodb+srv://user:<password>@ds.g3k6w.azure.mongodb.net/<dbname>?retryWrites=true&w=majority";
+const client = new MongoClient(uri, { useNewUrlParser: true });
+client.connect(err => {
+  const collection = client.db("test").collection("devices");
+  // perform actions on the collection object
+  client.close();
+});*/
+
+
+module.exports = class extends Command {
+
+    constructor(...args) {
+        super(...args, {
+            name: "report",
+            aliases: ['r']
+        });
+    }
+
+    async run(message, args) {
+        //await message.delete();
+        //if(message.author.id === '527994612271546379') return;
+        let rUser = message.mentions.users.last();
+        if(!rUser) return message.channel.send('Can\'t find that member.');
+        let rreason = args.slice(1).join(' ');
+        if(!rreason) return message.channel.send('Please specify a reason.');
+
+        const report = new Report({
+            _id: mongoose.Types.ObjectId(),
+            //username: rUser.user.displayName,
+            userID: rUser.id,
+            reason: rreason,
+            //rUsername: message.author.displayName,
+            rID: message.author.id,
+            time: message.createdAt
+        });
+
+        report.save()
+            .then(result => console.log(result))
+            .catch(err => console.log(err));
+
+        message.channel.send('Report Saved!');
+
+    }
+};

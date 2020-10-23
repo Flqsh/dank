@@ -1,0 +1,28 @@
+const Discord = module.require("discord.js")
+
+module.exports.run  = async (bot, message, args) => {
+    return message.channel.send("This command is temperarily disabled. Sorry for the inconvenience.");
+    if(!message.member.hasPermission("MANAGE_ROLES")) return message.channel.send("You do not have permission to execute this command.");
+
+    let toMute = message.mentions.members.first() || message.guild.members.cache.find('args[0]');
+    if(!toMute) return message.channel.send("You did not specify a user to mute!");
+
+    if(toMute.id === message.author.id) return message.channel.send("You cannot mute yourself.");
+    if(toMute.highestRole.position >= message.member.highestRole.position) return message.channel.send("You cannot mute a member that is higher than you.");
+    
+    let role = message.guild.roles.find(r => r.name === "Muted");
+    if(!role) return message.channel.send("You have no mute role. The mute role must be named 'Muted'");
+    if(toMute.roles.has(role.id)) return message.channel.send("This user is already muted!");
+    
+    await toMute.addRole(role);
+    return message.channel.send(`Muted ${toMute.tag}`);
+
+
+    //https://www.youtube.com/watch?v=w2fZKhsw4dE
+
+
+}
+
+module.exports.help = {
+    name: "mute"
+}

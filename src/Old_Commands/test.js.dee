@@ -1,0 +1,16 @@
+const Discord = module.require("discord.js")
+
+module.exports.run  = async (bot, message, args) => {
+        const msg = await message.channel.send('Pinging... Please wait...');
+
+        const latency = msg.createdTimestamp - message.createdTimestamp;
+        const choices = ['Is this really my ping?? (*yes*)', 'I hope my ping is good, if it\'s bad Flash is gonna beat me again...', 'Report bad ping to Flash!'];
+        const response = choices[Math.floor(Math.random() * choices.length)];
+
+        msg.edit(`${response} - Bot Latency: \`${latency}ms\`, API Latency: \`${Math.round(this.client.ws.ping)}ms\``); //left off at 5:05
+}
+
+
+module.exports.help = {
+    name: "ping"
+}

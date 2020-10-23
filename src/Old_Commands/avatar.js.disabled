@@ -1,0 +1,17 @@
+const Discord = module.require("discord.js")
+
+module.exports.run  = async (bot, message, args) => {
+    const men = message.mentions.users.first() || message.author
+    if(!message.guild.id) return;
+    const embed = new Discord.MessageEmbed()
+    .setTitle('Avatar')
+    .setColor('800080')
+    .setDescription(men.tag)
+    .setImage(men.displayAvatarURL());
+    message.channel.send(embed);
+    return;
+}
+
+module.exports.help = {
+    name: "avatar"
+}

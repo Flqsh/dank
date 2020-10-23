@@ -1,0 +1,16 @@
+const Discord = module.require("discord.js")
+
+module.exports.run  = async (bot, message, args) => {
+  return message.channel.send("This command is temperarily disabled. Sorry for the inconvenience.");
+
+    if (message.member.voice.channel) {
+        message.member.voice.channel.leave();
+      } else {
+        message.reply('dont lie to me bish u aint in a vc');
+      }
+            
+}
+
+module.exports.help = {
+    name: "leave"
+}

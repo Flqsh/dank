@@ -1,0 +1,16 @@
+const Discord = module.require("discord.js")
+
+module.exports.run  = async (bot, message, args) => {
+    if(message.channel.id !== '701353851747303487') return;
+    if(!message.member.roles.cache.some(role => role.id === '701353851097186384') && !message.member.roles.cache.some(role => role.id === '701353851172683838')){
+        return message.channel.send('\:x: Sorry! AmariBot Level 15 is required to use this command!');
+    }
+    let sliced = args.join(" ");
+    console.log(`${message.author.tag} (${message.author.id}): [@Chat Revivor] ${sliced}`);
+    message.channel.send(`[<@&704117486101987358>]: ${sliced}`);
+
+}
+
+module.exports.help = {
+    name: "chat"
+}

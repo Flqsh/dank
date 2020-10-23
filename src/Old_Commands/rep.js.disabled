@@ -1,0 +1,58 @@
+const Discord = module.require("discord.js");
+const usedCommand = new Set();
+const fs = module.require("fs");
+
+
+module.exports.run  = async (bot, message, args) => {
+    return message.channel.send("This command is temperarily disabled. Sorry for the inconvenience.");
+    const mentionedMember = message.mentions.members.first();
+    const chan = message.guild.channels.cache.find(channel => channel.id === "735268684272238656");
+
+    if(usedCommand.has(message.author.id)) return message.channel.send("You must wait 1 hour before using this command again.");
+    if(message.channel.id !== "701353852494020632") return message.channel.send("You may only use this command in the <#701353852494020632> channel.");
+    if(!mentionedMember) return message.channel.send('You must mention a user to rep.')
+    if(mentionedMember.id === message.author.id) return message.channel.send("You cannot rep yourself.")
+
+    //let rawdata = fs.readFileSync("./reps.json");
+    //let data = JSON.parse(message.author.id.rawdata);
+    
+
+    if(!bot.reps[message.author.id]){
+        bot.reps[message.author.id] = {
+            score: 0
+         }
+    }else{
+        let oldscore = bot.reps[message.author.id].score;
+        bot.reps[message.author.id] = {
+           score: 1 + oldscore
+        }
+    }
+
+    fs.writeFile("./reps.json", JSON.stringify(bot.reps, null, 4), err => {
+        if(err) throw err; 
+        let oldscore = bot.reps[message.author.id].score;
+        const embed = new Discord.MessageEmbed()
+        .setAuthor('Dank Society', 'https://cdn.discordapp.com/icons/701353851059437568/a_b3610757fd4401f5e1b2cfbcd3a5c76d.png?size=1024')
+        .setTitle('Trade Rep')
+        .setColor('a6ddaa')
+        .setDescription(`${mentionedMember} gained 1 trade rep point!\n5 rep points = <@&734291784250687528>`)
+        .setFooter('Contact a moderator to claim your role!');
+        message.channel.send(`${mentionedMember} has been rep'd. To check a user's current score, run the \`,score\` command!`);
+        chan.send(`${mentionedMember}`, embed);
+
+        console.log(`${message.author.tag} rep'd ${mentionedMember.tag}.`)
+        console.log(JSON.stringify(oldscore))
+        if(message.author.id !== "527994612271546379"){
+        usedCommand.add(message.author.id);
+        }
+    })
+
+
+    setTimeout(() => {
+        usedCommand.delete(message.author.id);
+    }, 3600 * 1000);
+  
+}
+module.exports.help = {
+    name: "rep"
+}

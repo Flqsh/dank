@@ -1,0 +1,13 @@
+const Discord = module.require("discord.js")
+const config = require('./Dank Society/config.json');
+const fs = require("fs");
+
+module.exports.run  = async (bot, message, args) => {
+    return;
+    let msg = message.content.length - ( + config.prefix)
+    message.channel.send(msg);
+}
+
+module.exports.help = {
+    name: "length"
+}

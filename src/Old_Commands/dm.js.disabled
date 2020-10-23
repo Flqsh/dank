@@ -1,0 +1,19 @@
+/*const Discord = module.require("discord.js")
+const config = require('./Dank Society/config.json');
+
+module.exports.run  = async (bot, message, args) => {
+    return message.channel.send("This command is permanently disabled as it is a failed project that you can just use CarlBot for.")
+    let message = message.content.length - (3 + config.prefix)
+    message.channel.send(message.content.length);
+    return;
+    if(!args[0]) return message.channel.send("You must specify a member to DM!")
+    if(args[0] < 3){
+
+    }
+    const dmMember = member.guild.members.cache.find(member => member === "701353851558821958")
+            
+}
+
+module.exports.help = {
+    name: "dm"
+}*/

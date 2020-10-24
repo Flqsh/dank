@@ -51,6 +51,18 @@ module.exports = class Util {
         if (!this.client.guildSettings.has(id)) await this.client.guildSettings.set(id, defaultGuild);
         return;
     }
+
+    async getPrefix(id) {
+        let pref = this.client.guildSettings.has(id) ? (
+            this.client.guildSettings.get(id).prefix
+        ) : (
+            this.client.utils.setDefaultGuild(id),
+            this.client.guildSettings.get(id).prefix
+        );
+        return await pref
+    }
+
+
 ///^[A-Za-z-. \d]+$/
 
     englishify(string) {

@@ -12,21 +12,20 @@ module.exports = class extends Event {
 
 	async run(message) {
 
-		//if (message.author.id == '527994612271546379') return message.channel.send(message.content);
 
 		const mentionRegex = RegExp(`^<@!?${this.client.user.id}>$`);
 		const mentionRegexPrefix = RegExp(`^<@!?${this.client.user.id}> `);
-		const globalPrefix = this.client.prefix;
-		const usedPrefix = globalPrefix;
 
 		//const usedPrefix = guildsettings.has(`guild_${message.guild.id}_prefix`) ? guildsettings.get(`guild_${message.guild.id}_prefix`) : globalPrefix;
 
 		if (!message.guild || message.author.bot) return;
 
-		if (message.content.match(mentionRegex)) message.channel.send(`My prefix for ${message.guild.name} is \`${usedPrefix}\`.`);
+		let pref = await this.client.utils.getPrefix(message.guild.id);
+
+		if (message.content.match(mentionRegex)) message.channel.send(`My prefix for ${message.guild.name} is \`${pref}\`.`);
 
 		const prefix = message.content.match(mentionRegexPrefix) ?
-			message.content.match(mentionRegexPrefix)[0] : usedPrefix;
+			message.content.match(mentionRegexPrefix)[0] : pref;
 
 
 
@@ -47,8 +46,7 @@ module.exports = class extends Event {
 				remaining = ms(remaining - Date.now(), {
 					long: true
 				});
-				message.channel.send(`Sorry **${message.author}**, you have to wait **${remaining}** before running this command.`);
-				return;
+				return message.channel.send(`Sorry **${message.author.username}**, you have to wait **${remaining}** before running this command.`);
 			}
 		}
 

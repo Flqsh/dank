@@ -5,7 +5,7 @@ const glob = promisify(require('glob'));
 const Command = require('./Command.js');
 const Event = require('./Event.js');
 const fs = require('fs');
-
+ 
 module.exports = class Util {
 
 	constructor(client) {

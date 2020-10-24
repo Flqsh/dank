@@ -5,6 +5,7 @@ const glob = promisify(require('glob'));
 const Command = require('./Command.js');
 const Event = require('./Event.js');
 const fs = require('fs');
+const defaultGuild = require('../Data/Database/defaultGuildSettings.json')
  
 module.exports = class Util {
 
@@ -44,6 +45,24 @@ module.exports = class Util {
 
     capitalize(string) {
 		return string.split(' ').map(str => str.slice(0, 1).toUpperCase() + str.slice(1)).join(' ');
+    }
+
+    async setDefaultGuild(id) {
+        if (!this.client.guildSettings.has(id)) await this.client.guildSettings.set(id, defaultGuild);
+        return;
+    }
+///^[A-Za-z-. \d]+$/
+
+    englishify(string) {
+        const regex = /^[A-Za-z-.\d]+/ //after -.
+        return string.replace(regex, '')
+        /*const arr = string.split('')
+        const finalArr = new Array()
+        arr.forEach((letter) => {
+            if (regex.test(letter)) {
+                finalArr.push(letter)
+            }
+        });*/
     }
 
     checkOwner(target) {

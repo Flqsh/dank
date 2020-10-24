@@ -1,4 +1,6 @@
 const mainClient = require('./Structures/mainClient');
+const keyv = require('./Structures/mainClient.js')
+
 
 const config = require('./config.json');
 const client = new mainClient(config);

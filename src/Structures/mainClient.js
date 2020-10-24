@@ -1,6 +1,5 @@
 const { Client, Collection, Permissions } = require('discord.js');
 const Util = require('./Util.js');
-//const Enmap = require('enmap')
 
 
 module.exports = class mainClient extends Client {
@@ -20,7 +19,7 @@ module.exports = class mainClient extends Client {
 		this.utils = new Util(this);
 		
 		this.owners = options.owners;
-
+		
 		//this.guildSettings = new Enmap({
 			//name: "guildSettings"
 		//});

@@ -6,7 +6,7 @@ const DEFAULT_RATELIMIT = {
 	bucket: 5,
 	stack: false
 };
-
+ 
 module.exports = class Command {
 
 	constructor(client, name, options = {}) {

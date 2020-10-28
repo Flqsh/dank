@@ -15,7 +15,6 @@
     "ffmpeg-static": "^4.2.7",
     "fs": "0.0.1-security",
     "glob": "^7.1.6",
-    "is-number": "^7.0.0",
     "moment": "^2.29.1",
     "ms": "^2.1.2",
     "node-fetch": "^2.6.1",

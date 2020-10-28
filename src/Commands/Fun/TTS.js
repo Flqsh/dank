@@ -1,5 +1,5 @@
-const googleTTS = require('google-tts-api')
-const discordTTS = require('discord-tts');
+/*const googleTTS = require('google-tts-api')
+const discordTTS = require('discord-tts');*/
 const Command = require('../../Structures/Command');
 const Discord = require('discord.js')
 
@@ -7,14 +7,6 @@ module.exports = class extends Command {
 
     constructor(...args) {
         super(...args, {
-            ratelimit: {
-                // how many times this command can be ran before getting limited.
-                bucket: 1,
-                // the time (in milliseconds) before the command can be used again, in this case: seven seconds
-                reset: 7 * 1000,
-                // whether the reset time should stack.
-                stack: true
-            },
             aliases: [],
             category: 'Fun',
             args: true
@@ -22,6 +14,7 @@ module.exports = class extends Command {
     }
 
     async run(message, args) {
+        return;/*
         const voiceChannel = message.member.voice.channel;
         let ttsusage = args.join(' ');
 
@@ -33,6 +26,6 @@ module.exports = class extends Command {
             const dispatcher = connection.play(stream);
             message.react('🔊');
             dispatcher.on('finish', () => voiceChannel.leave())
-        });
+        });*/
     }
 };

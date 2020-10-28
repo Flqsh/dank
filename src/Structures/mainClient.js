@@ -1,6 +1,6 @@
 const { Client, Collection, Permissions } = require('discord.js');
 const Util = require('./Util.js');
-const db = require('quick.db');
+//const db = require('quick.db');
 
 module.exports = class mainClient extends Client {
 
@@ -20,7 +20,7 @@ module.exports = class mainClient extends Client {
 		
 		this.owners = options.owners;
 		
-		this.guildSettings = new db.table('guildSettings');
+		//this.guildSettings = new db.table('guildSettings');
 		
 		//this.guildSettings = new Enmap({
 			//name: "guildSettings"

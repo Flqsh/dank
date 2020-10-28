@@ -1,6 +1,5 @@
 const Command = require('../../Structures/Command');
-const db = require('quick.db');
-const defaultt = require('./../../Data/Database/defaultGuildSettings.json')
+const defaultt = require('../../Data/Database/defaultGuildSettings.json')
 
 
 module.exports = class extends Command {

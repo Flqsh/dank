@@ -10,9 +10,7 @@
   "license": "MIT",
   "dependencies": {
     "@extreme_hero/deeptype": "^1.0.1",
-    "discord-tts": "^1.0.1",
     "discord.js": "^12.4.1",
-    "ffmpeg-static": "^4.2.7",
     "fs": "0.0.1-security",
     "glob": "^7.1.6",
     "moment": "^2.29.1",

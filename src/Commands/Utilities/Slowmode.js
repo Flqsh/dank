@@ -18,13 +18,13 @@ module.exports = class extends Command {
     run(message, args) {
         let time;
         if (args[0]) {
-            if (isNaN(args[0])){
+            if (isNaN(args[0])) {
                 time = 0;
             } else {
                 if (args[0].startsWith('-')) {
                     return message.channel.send('You cannot set a negative slowmode.')
                 } else {
-                time = args[0];
+                    time = args[0];
                 }
             }
         } else {

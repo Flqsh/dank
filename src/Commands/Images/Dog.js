@@ -12,12 +12,12 @@ const subreddits = [
 module.exports = class extends Command {
 
     constructor(...args) {
-		super(...args, {
+        super(...args, {
             aliases: [],
             description: 'Request a cute dog pic from reddit.',
-			category: 'Images',
-		});
-	}
+            category: 'Images',
+        });
+    }
 
     async run(message) {
         let reddit = subreddits[Math.floor(Math.random() * subreddits.length)];

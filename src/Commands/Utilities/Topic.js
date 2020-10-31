@@ -32,9 +32,9 @@ module.exports = class extends Command {
         if (topic.includes('\\')) return message.channel.send("Topic must not include a back slash.");
 
         if (!message.channel) return message.channel.send('Error, cannot find the channel.');
-            message.channel.startTyping();
-            message.channel.setTopic(topic, `Topic command issued by ${message.author.tag}.`).then(message.channel.stopTyping(true));
+        message.channel.startTyping();
+        message.channel.setTopic(topic, `Topic command issued by ${message.author.tag}.`).then(message.channel.stopTyping(true));
 
-            message.channel.send(`Set the topic to \`${topic}\`.\nPlease note: this command has an api ratelimit of 2 times per 10 minutes.`)
+        message.channel.send(`Set the topic to \`${topic}\`.\nPlease note: this command has an api ratelimit of 2 times per 10 minutes.`)
     }
 };

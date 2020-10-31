@@ -32,8 +32,10 @@ module.exports = class extends Command {
         arr = arr.join('\n');
 
         let finalString = arr;
+        let final = finalString;
 
-        if (arr > 2048) {
+
+        if (arr.length > 2048) {
             finalString = await sourcebin.create([{
                 name: 'dump.txt',
                 content: arr,
@@ -43,19 +45,19 @@ module.exports = class extends Command {
                 description: 'Outcome of dump command.'
             });
             finalString = finalString.url;
-            console.log(finalString)
 
+            final = `[Click to view role members](${finalString})`
         } else {
             finalString = arr;
+            final = finalString;
         }
 
 
         const embed = await new Discord.MessageEmbed()
             .setTitle(`Users with ${role.name}`)
             .setAuthor(`${array.length} members`)
-            .setDescription(`[Click to view role members](${finalString})`)
+            .setDescription(final)
             .setColor(role.color || 'BLUE')
-            //.setFooter(moment(role.createdTimestamp).format('L'))
             .setFooter(`ID: ${role.id} • Created ${moment(role.createdTimestamp).fromNow()}`)
 
         message.channel.send(embed);

@@ -22,8 +22,8 @@ module.exports = class extends Command {
 			.setColor(message.guild.me.displayHexColor || 'BLUE')
 			.setTitle('Bot Information')
 			.addField('General', [
-                `**❯ Client:** ${this.client.user.tag} (${this.client.user.id})`,
-                '**❯ Owner:** Flash#1000 (527994612271546379)',
+				`**❯ Client:** ${this.client.user.tag} (${this.client.user.id})`,
+				'**❯ Owner:** Flash#1000 (527994612271546379)',
 				`**❯ Commands:** ${this.client.commands.size}`,
 				`**❯ Servers:** ${this.client.guilds.cache.size.toLocaleString()} `,
 				`**❯ Users:** ${this.client.guilds.cache.reduce((a, b) => a + b.memberCount, 0).toLocaleString()}`,

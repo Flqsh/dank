@@ -6,19 +6,22 @@ module.exports = class extends Command {
 	constructor(...args) {
 		super(...args, {
 			aliases: ['h'],
-			description: 'Displays all the commands in the bot',
-			category: 'Utilities',
+			description: 'Displays all the commands in the bot.',
+			category: 'Bot',
 			usage: '[command]',
-			roleMention: 'false',
 		});
 	}
 
 	async run(message, [command]) {
 		const embed = new MessageEmbed()
 			.setColor('BLUE')
-			.setAuthor(`${message.guild.name}'s Bot Manual`, message.guild.iconURL({ dynamic: true }))
+			.setAuthor(`${message.guild.name}'s Bot Manual`, message.guild.iconURL({
+				dynamic: true
+			}))
 			.setThumbnail(this.client.user.displayAvatarURL())
-			.setFooter(`Requested by ${message.author.tag}`, message.author.displayAvatarURL({ dynamic: true }))
+			.setFooter(`Requested by ${message.author.tag}`, message.author.displayAvatarURL({
+				dynamic: true
+			}))
 			.setTimestamp();
 
 		if (command) {
@@ -35,7 +38,7 @@ module.exports = class extends Command {
 
 			embed.setAuthor(`${this.client.utils.capitalize(cmd.name)} Command Help`, this.client.user.displayAvatarURL());
 			embed.setDescription([
-				`**❯ Aliases:** ${cmd.aliases.length ? cmd.aliases.map(alias => `\`${alias}\``).join(' ') : 'None'}`,
+				`**❯ Aliases:** ${cmd.aliases.length ? cmd.aliases.map(alias => `\`${alias}\``).join(', ') : 'None'}`,
 				`**❯ Description:** ${cmd.description}`,
 				`**❯ Category:** ${cmd.category}`,
 				`**❯ Usage:** ${cmd.usage}`,
@@ -46,7 +49,7 @@ module.exports = class extends Command {
 			embed.setDescription([
 				`These are the available commands for ${message.guild.name}`,
 				`**Prefix:** \`${this.client.prefix}\``,
-				`**Command Parameters:** \`<>\` is required & \`[]\` is optional`,
+				`**Command Parameters:** \`<>\` is required and \`[]\` is optional`,
 				'**Command Cooldowns:** ⏲️ Time until a refreshes of cooldown, 🔁 Amount of command uses before cooldown, <:stackoverflow:762207493992480768> If the cooldown renews when command is used on cooldown.'
 			]);
 			let categories;
@@ -58,7 +61,7 @@ module.exports = class extends Command {
 
 			for (const category of categories) {
 				embed.addField(`**${this.client.utils.capitalize(category)}**`, this.client.commands.filter(cmd =>
-					cmd.category === category).map(cmd => `\`${cmd.name}\``).join(' '));
+					cmd.category === category).map(cmd => `\`${cmd.name}\``).join(', '));
 			}
 			return message.channel.send(embed);
 		}

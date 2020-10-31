@@ -4,7 +4,7 @@
   "description": "Dank Society Biscord Bot (Developed by Flash#1000 for the Dank Society server)",
   "main": "src/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon ."
   },
   "author": "Flash#0001",
   "license": "MIT",
@@ -21,6 +21,8 @@
     "sourcebin": "^3.2.4",
     "util": "^0.12.3"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "nodemon": "^2.0.6"
+  },
   "keywords": []
 }

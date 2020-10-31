@@ -1,5 +1,5 @@
 /node_modules
 json.sqlite
 OldCode.js
-/src/config.json
+config.json
 /src/Database/keyv.sqlite

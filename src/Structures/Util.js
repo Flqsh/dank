@@ -102,13 +102,11 @@ module.exports = class Util {
     }
 
     async loadCommands() {
-        return glob(`${this.directory}commands/**/*.js`).then(commands => {
-            for (const commandFile of commands) {
+        return glob(`${this.directory}Commands/**/*.js`).then(Commands => {
+            for (const commandFile of Commands) {
                 //delete require.cache[commandFile];
                 delete require.cache[require.resolve(commandFile)];
-                const {
-                    name
-                } = path.parse(commandFile);
+                const { name } = path.parse(commandFile);
                 const File = require(commandFile);
                 if (!this.isClass(File)) throw new TypeError(`Command ${name} doesn't export a class.`);
                 const command = new File(this.client, name.toLowerCase());
@@ -133,12 +131,10 @@ module.exports = class Util {
     }
 
     async loadEvents() {
-        return glob(`${this.directory}events/**/*.js`).then(events => {
-            for (const eventFile of events) {
+        return glob(`${this.directory}Events/**/*.js`).then(Events => {
+            for (const eventFile of Events) {
                 delete require.cache[eventFile];
-                const {
-                    name
-                } = path.parse(eventFile);
+                const { name } = path.parse(eventFile);
                 const File = require(eventFile);
                 if (!this.isClass(File)) throw new TypeError(`Event ${name} doesn't export a class!`);
                 const event = new File(this.client, name.toLocaleLowerCase());

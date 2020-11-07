@@ -1,12 +1,24 @@
-const { Client, Collection, Permissions } = require('discord.js');
+const { Client, Collection, Permissions, Intents } = require('discord.js');
 const Util = require('./Util.js');
+const intents = new Intents();
+intents.add(
+	'GUILD_PRESENCES',
+	'GUILD_MEMBERS',
+	'GUILDS',
+	'GUILD_VOICE_STATES',
+	'GUILD_MESSAGES',
+	'GUILD_MESSAGE_REACTIONS'
+);
 
 module.exports = class mainClient extends Client {
-
 	constructor(options = {}) {
 		super({
-			disableMentions: 'everyone'
+			disableMentions: 'everyone',
+			ws: {
+				intents: intents
+			}
 		});
+
 		this.validate(options);
 
 		this.commands = new Collection();
@@ -18,7 +30,6 @@ module.exports = class mainClient extends Client {
 		this.utils = new Util(this);
 
 		this.owners = options.owners;
-
 	}
 
 	validate(options) {
@@ -40,5 +51,4 @@ module.exports = class mainClient extends Client {
 		this.utils.loadEvents();
 		super.login(token);
 	}
-
 }

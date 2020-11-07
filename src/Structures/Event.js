@@ -1,5 +1,4 @@
 module.exports = class Event {
-
     constructor(client, name, options = {}) {
         this.name = name;
         this.client = client;
@@ -10,5 +9,4 @@ module.exports = class Event {
     async run(...args) {
         throw new Error(`The run method has not been implmented in ${this.name}`);
     }
-
 }

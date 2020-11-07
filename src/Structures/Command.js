@@ -9,7 +9,6 @@ module.exports = class Command {
 		this.description = options.description || 'No description provided.';
 		this.category = options.category || 'Misc';
 		this.usage = `${this.client.prefix}${this.name} ${options.usage || ''}`.trim();
-		//this.ratelimit = Util.mergeDefault(DEFAULT_RATELIMIT, options.ratelimit || DEFAULT_RATELIMIT);
 		this.userPerms = new Permissions(options.userPerms).freeze();
 		this.botPerms = new Permissions(options.botPerms).freeze();
 		this.guildOnly = options.guildOnly || true;

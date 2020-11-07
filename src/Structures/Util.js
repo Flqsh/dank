@@ -47,6 +47,10 @@ module.exports = class Util {
         return string.split(' ').map(str => str.slice(0, 1).toUpperCase() + str.slice(1)).join(' ');
     }
 
+    capitalizeFirstLetter(string) {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+    }
+
     async setDefaultGuild(id) {
         if (!this.client.guildSettings.has(id)) await this.client.guildSettings.set(id, defaultGuild);
         return;

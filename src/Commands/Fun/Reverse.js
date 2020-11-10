@@ -1,4 +1,5 @@
 const Command = require('../../Structures/Command');
+const { Util } = require('discord.js')
 
 module.exports = class extends Command {
 
@@ -19,6 +20,6 @@ module.exports = class extends Command {
         }
         let reversed = reverse(args)
         if (message.guild.me.hasPermission('MANAGE_MESSAGES')) message.delete();
-        message.channel.send(reversed)
+        message.channel.send(Util.removeMentions(reversed))
     }
 };

@@ -16,7 +16,7 @@ module.exports = class extends Command {
     }
 
     async run(message, ...query) {
-        const url = `https://djsodcs.sorta.moe/v2/embed?src=stable&q=${encodeURIComponent(query)}`;
+        const url = `https://djsdocs.sorta.moe/v2/embed?src=stable&q=${encodeURIComponent(query)}`;
 
         const docFetch = await fetch(url);
         const embed = await docFetch.json();
@@ -41,7 +41,7 @@ module.exports = class extends Command {
             react = await msg.awaitReactions(
                 (reaction, user) => reaction.emoji.name === '🗑' && user.id === message.author.id, {
                     max: 1,
-                    time: 1000,
+                    time: 10000,
                     errors: ['time']
                 }
             );

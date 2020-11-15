@@ -25,26 +25,15 @@ module.exports = class extends Command {
             return message.reply(Util.removeMentions(`"${query}" couldn't be located within the discord.js documentation (<https://discord.js.org/>).`));
         }
 
-        if (!message.guild) {
-            return message.channel.send({
-                embed
-            })
-        }
+        if (!message.guild) return message.channel.send(embed)
 
-        const msg = await message.channel.send({
-            embed
-        });
+        const msg = await message.channel.send(embed);
+
         msg.react('🗑')
 
         let react;
         try {
-            react = await msg.awaitReactions(
-                (reaction, user) => reaction.emoji.name === '🗑' && user.id === message.author.id, {
-                    max: 1,
-                    time: 10000,
-                    errors: ['time']
-                }
-            );
+            react = await msg.awaitReactions((reaction, user) => reaction.emoji.name === '🗑' && user.id === message.author.id, { max: 1, time: 10000, errors: ['time'] });
         } catch (err) {
             msg.reactions.removeAll();
         }
